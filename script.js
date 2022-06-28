@@ -34,7 +34,7 @@ var choice = {
   number: "0123456789",
   lowerCase: "abcdefghijklmnopqrstuvwxyz",
   upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  specialCharactors: " !#$%&'()*+,-./:;<=>?@[]^_`{|}~"
+  specialCharactors: "!#$%&'()*+,-./:;<=>?@[]^_`{|}~"
 }
 
 //this is an array has 4 functions that the each function would return 1 random charactor from each strigs
@@ -53,6 +53,7 @@ var choiceCombo = [
   }
 ];
 
+var choiceHold = [];
 // Write password to the #password input
 function writePassword() {
   //ask to set the length of password
@@ -64,37 +65,102 @@ function writePassword() {
   } else{
     //ask to chose what charactor the password has
     var numberCheck = window.confirm("include a number?");
-    var upperCheck = window.confirm("include an upper case letter?");
     var lowerCheck = window.confirm("include a lower case letter?");
+    var upperCheck = window.confirm("include an upper case letter?");
     var charactorCheck = window.confirm("include a special charactor?");
     //validate the charactor choice
     if(!numberCheck && !upperCheck && !lowerCheck && !charactorCheck){
       window.alert("at least one character type should be selected ");
+      return;
     } 
-    //else if(!upperCheck && !lowerCheck && !charactorCheck){
-     // choiceCombo = choiceCombo.splice(0,1);
-    //} else if(!numberCheck && !lowerCheck  && !charactorCheck){
-     // choiceCombo = choiceCombo.splice(2,1);
-    //} else if(!numberCheck && !upperCheck  && !charactorCheck){
-     // choiceCombo = choiceCombo.splice(1,1);
-    //} else if(!numberCheck && !upperCheck && !lowerCheck){
-      //choiceCombo = choiceCombo.splice(3,1);
-    //} 
-      else{
-      //generate password
-      realpassword = "";
-      while(passwordLength > realpassword.length){
-        var finalPassword = choiceCombo[Math.floor(Math.random() *choiceCombo.length)];
-        
-        realpassword += finalPassword();
-      
-      }
+      //number only
+      else if(!upperCheck && !lowerCheck && !charactorCheck){
+      choiceHold = choiceCombo.slice(0,1);
+    } 
+      //lowercase only
+      else if(!numberCheck && !upperCheck  && !charactorCheck){
+        choiceHold = choiceCombo.slice(1,2);
+    } 
+      //uppercase only
+      else if(!numberCheck && !lowerCheck  && !charactorCheck){
+        choiceHold = choiceCombo.slice(2,3);
+    } 
+      //symbol only
+      else if(!numberCheck && !upperCheck && !lowerCheck){
+        choiceHold = choiceCombo.slice(3,4);
+    } 
+      //number+lowercase
+      else if(!upperCheck  && !charactorCheck){
+        choiceHold = choiceCombo.slice(0,2);
+    }
+      //lowercase + uppercase
+      else if(!numberCheck  && !charactorCheck){
+        choiceHold = choiceCombo.slice(1,3);
+    }
+      //uppercase + symbol
+      else if(!numberCheck  && !lowerCheck){
+        choiceHold = choiceCombo.slice(2,4);
+    }
+      //numner + symbol
+      else if(!upperCheck && !lowerCheck){
+        var num = choiceCombo[0];
+        var sym = choiceCombo[3];
+        choiceHold = {num, sym};
+    }
+      //numner + uppercase
+      else if(!lowerCheck && !charactorCheck){
+        var num = choiceCombo[0];
+        var upper = choiceCombo[2];
+        choiceHold = {num, upper};
+    }
+      //lowercase + symbol
+      else if(!numberCheck && !upperCheck){
+        var lower = choiceCombo[1];
+        var sym = choiceCombo[3];
+        choiceHold = {lower, sym};
+    }
+      //lowercase + uppercase + symbol
+      else if(!numberCheck){
+        choiceHold = choiceCombo.slice(1,4);
+    }    
+      //number + lowercase + uppercase
+      else if(!charactorCheck){
+        choiceHold = choiceCombo.slice(0,3);
+    }      
+    //number + uppercase + symbo
+      else if(!lowerCheck){
+        var num = choiceCombo[0];
+        var upper = choiceCombo[2];
+        var sym = choiceCombo[3];
+        choiceHold = {num, upper, sym};
+    }
+    //number + lowercase + symbo
+    else if(!upperCheck){
+      var num = choiceCombo[0];
+      var lower = choiceCombo[1];
+      var sym = choiceCombo[3];
+      choiceHold = {num, lower, sym};
+  }    
+    //all combo
+    else{
+      choiceHold = choiceCombo;
     }
   }
-  var password = realpassword;
-  var passwordText = document.querySelector("#password");
 
+        //generate password
+        function generatePassword(){
+          var realpassword = "";
+          while(passwordLength > realpassword.length){
+            var finalPassword = choiceHold[Math.floor(Math.random() *choiceHold.length)];
+            
+            realpassword += finalPassword();
   
+          }
+          return realpassword;
+        }
+
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 

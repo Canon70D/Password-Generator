@@ -1,1 +1,3 @@
 # Password-Generator
+# commit - 1, can generate password with all 4 characters, but can't chose specific character type to make combo
+# commit -2, users can chose what they want, but some combo not working ... 
