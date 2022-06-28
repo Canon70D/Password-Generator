@@ -119,6 +119,7 @@ function writePassword() {
   //validate the input of length
   if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)){
     window.alert("The input should be a number between 8 to 128");
+    return;
   } else{
     //ask to chose what charactor the password has
     var numberCheck = window.confirm("include a number?");
