@@ -53,6 +53,63 @@ var choiceCombo = [
   }
 ];
 
+//can't make some of the user choice work, had to do this stuid way ...
+var choiceCombo1 = [
+  function number(){
+    return choice.number[Math.floor(Math.random() * choice.number.length)];
+  },
+  function upperCase(){
+    return choice.upperCase[Math.floor(Math.random() * choice.upperCase.length)];
+  },
+  function specialCharactors(){
+    return choice.specialCharactors[Math.floor(Math.random() * choice.specialCharactors.length)];
+  }
+];
+
+var choiceCombo2 = [
+  function number(){
+    return choice.number[Math.floor(Math.random() * choice.number.length)];
+  },
+  function lowerCase(){
+    return choice.lowerCase[Math.floor(Math.random() * choice.lowerCase.length)];
+  },
+  function specialCharactors(){
+    return choice.specialCharactors[Math.floor(Math.random() * choice.specialCharactors.length)];
+  }
+];
+
+var choiceCombo3 = [
+  function number(){
+    return choice.number[Math.floor(Math.random() * choice.number.length)];
+  },
+
+  function upperCase(){
+    return choice.upperCase[Math.floor(Math.random() * choice.upperCase.length)];
+  },
+
+];
+
+var choiceCombo4 = [
+  function number(){
+    return choice.number[Math.floor(Math.random() * choice.number.length)];
+  },
+
+  function specialCharactors(){
+    return choice.specialCharactors[Math.floor(Math.random() * choice.specialCharactors.length)];
+  }
+];
+
+var choiceCombo5 = [
+
+  function lowerCase(){
+    return choice.lowerCase[Math.floor(Math.random() * choice.lowerCase.length)];
+  },
+
+  function specialCharactors(){
+    return choice.specialCharactors[Math.floor(Math.random() * choice.specialCharactors.length)];
+  }
+];
+
 var choiceHold = [];
 // Write password to the #password input
 function writePassword() {
@@ -73,6 +130,20 @@ function writePassword() {
       window.alert("at least one character type should be selected ");
       return;
     } 
+    //was trying to do this to avoid such a long IF statement and making different choiceCombo...
+    //but can't figure out a way to achieve match userchoice to the name of the choiceCombo function and call that function along ...
+      /*function generatePassword(){
+      var realpassword = "";
+      while(passwordLength > realpassword.length){
+        var finalPassword = choiceCombo[Math.floor(Math.random() *choiceCombo.length)];
+        var check = userChoice match ---> name of the choiceCombo.function;
+        if(check){
+        realpassword += finalPassword();
+          }
+      }
+      return realpassword;
+    }
+    */
       //number only
       else if(!upperCheck && !lowerCheck && !charactorCheck){
       choiceHold = choiceCombo.slice(0,1);
@@ -103,21 +174,21 @@ function writePassword() {
     }
       //numner + symbol
       else if(!upperCheck && !lowerCheck){
-        var num = choiceCombo[0];
-        var sym = choiceCombo[3];
-        choiceHold = {num, sym};
+        //var num = choiceCombo[0];
+        //var sym = choiceCombo[3];
+        choiceHold = choiceCombo4;
     }
       //numner + uppercase
       else if(!lowerCheck && !charactorCheck){
-        var num = choiceCombo[0];
-        var upper = choiceCombo[2];
-        choiceHold = {num, upper};
+        //var num = choiceCombo[0];
+        //var upper = choiceCombo[2];
+        choiceHold = choiceCombo3;
     }
       //lowercase + symbol
       else if(!numberCheck && !upperCheck){
-        var lower = choiceCombo[1];
-        var sym = choiceCombo[3];
-        choiceHold = {lower, sym};
+        //var lower = choiceCombo[1];
+        //var sym = choiceCombo[3];
+        choiceHold = choiceCombo5;
     }
       //lowercase + uppercase + symbol
       else if(!numberCheck){
@@ -129,17 +200,17 @@ function writePassword() {
     }      
     //number + uppercase + symbo
       else if(!lowerCheck){
-        var num = choiceCombo[0];
-        var upper = choiceCombo[2];
-        var sym = choiceCombo[3];
-        choiceHold = {num, upper, sym};
+        //var num = choiceCombo[0];
+        //var upper = choiceCombo[2];
+        //var sym = choiceCombo[3];
+        choiceHold = choiceCombo1;
     }
     //number + lowercase + symbo
     else if(!upperCheck){
-      var num = choiceCombo[0];
-      var lower = choiceCombo[1];
-      var sym = choiceCombo[3];
-      choiceHold = {num, lower, sym};
+      //var num = choiceCombo[0];
+      //var lower = choiceCombo[1];
+      //var sym = choiceCombo[3];
+      choiceHold = choiceCombo2;
   }    
     //all combo
     else{
