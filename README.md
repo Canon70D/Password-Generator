@@ -2,7 +2,7 @@
 # can generate password based on users' choice of length, number, uppercase, lower case and symbol
 # will also check the input if valid
 # see link to the application
-
+# https://canon70d.github.io/Password-Generator/
 # attached a overview of the Generator
 # ![alt text](sample.png)
 
